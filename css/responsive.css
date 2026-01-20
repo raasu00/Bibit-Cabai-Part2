@@ -1,0 +1,229 @@
+/* Responsive Styles */
+
+/* Tablet - 992px ke bawah */
+@media (max-width: 992px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .section-title h2 {
+        font-size: 2rem;
+    }
+    
+    .paket-container, .bibit-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Menu tablet */
+    nav ul {
+        gap: 30px;
+    }
+    
+    .order-now-btn {
+        padding: 8px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Tablet kecil - 768px ke bawah */
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block;
+        margin-right: 10px;
+    }
+    
+    /* Menu mobile */
+    nav {
+        position: static;
+        transform: none;
+    }
+    
+    nav ul {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: auto;
+        background-color: white;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        transition: all 0.5s ease;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-20px);
+        border-radius: 0 0 10px 10px;
+        overflow: hidden;
+        gap: 0;
+    }
+    
+    nav ul.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        /* Pastikan menu di atas konten lain */
+        z-index: 1000;
+    }
+    
+    nav ul li {
+        margin: 0;
+        width: 100%;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+    }
+    
+    nav ul li:last-child {
+        border-bottom: none;
+    }
+    
+    nav ul li a {
+        font-size: 1.1rem;
+        display: block;
+        padding: 15px 20px;
+        color: var(--dark);
+        transition: all 0.3s;
+    }
+    
+    nav ul li a:hover {
+        background-color: var(--light-gray);
+        color: var(--primary);
+    }
+    
+    nav ul li a.active {
+        background-color: var(--primary-light);
+        color: white;
+    }
+    
+    nav ul li a.active:after {
+        display: none;
+    }
+    
+    /* Tombol Pesan Sekarang di Menu Mobile */
+    .mobile-order-btn {
+        display: block;
+        width: calc(100% - 40px);
+        margin: 20px;
+        text-align: center;
+        background-color: var(--secondary);
+        color: white;
+        padding: 12px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: all 0.3s;
+        border: 2px solid var(--secondary);
+    }
+    
+    .mobile-order-btn:hover {
+        background-color: #e68900;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Sembunyikan tombol Pesan Sekarang di header mobile */
+    .order-now-btn {
+        display: none !important; /* Tambahkan !important untuk memastikan disembunyikan di mobile */
+    }
+    
+    .hero {
+        padding: 100px 0;
+    }
+    
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+    
+    .hero p {
+        font-size: 1.1rem;
+    }
+    
+    section {
+        padding: 60px 0;
+    }
+    
+    .home-content .toko-description {
+        padding: 30px;
+    }
+    
+    .contact-container {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Tambahan untuk mencegah scroll saat menu terbuka */
+    body.no-scroll {
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+/* Mobile - 576px ke bawah */
+@media (max-width: 576px) {
+    .logo-text {
+        font-size: 1.4rem;
+    }
+    
+    .hero h1 {
+        font-size: 1.9rem;
+    }
+    
+    .section-title h2 {
+        font-size: 1.7rem;
+    }
+    
+    .paket-container, .bibit-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .paket-card, .bibit-card {
+        margin-bottom: 20px;
+    }
+    
+    .paket-img, .bibit-img {
+        height: 180px;
+    }
+    
+    .contact-info, .contact-map {
+        padding: 20px;
+    }
+    
+    .mobile-menu-btn {
+        font-size: 1.3rem;
+        margin-right: 5px;
+    }
+}
+
+/* Desktop - Tambahkan rule untuk menampilkan tombol Pesan Sekarang di desktop saja */
+@media (min-width: 769px) {
+    .mobile-order-btn {
+        display: none !important;
+    }
+    
+    .order-now-btn {
+        display: inline-flex !important; /* Tampilkan di desktop */
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 10px 25px;
+        background-color: var(--secondary);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    
+    .order-now-btn:hover {
+        background-color: #e68900;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+}
