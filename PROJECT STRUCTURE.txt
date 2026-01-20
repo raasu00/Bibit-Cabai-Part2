@@ -1,0 +1,38 @@
+bibitcabai-react/
+├── public/
+│   ├── index.html
+│   ├── images/
+│   │   ├── cabai-merah-keriting.jpg
+│   │   ├── cabai-rawit-hijau.jpg
+│   │   └── ...
+│   └── favicon.ico
+├── src/
+│   ├── components/
+│   │   ├── layout/
+│   │   │   ├── Header.tsx
+│   │   │   ├── Footer.tsx
+│   │   │   └── Layout.tsx
+│   │   ├── ui/
+│   │   │   ├── Button.tsx
+│   │   │   ├── Card.tsx
+│   │   │   └── Icon.tsx
+│   │   └── sections/
+│   │       ├── HeroSection.tsx
+│   │       ├── ProductCard.tsx
+│   │       └── PackageCard.tsx
+│   ├── pages/
+│   │   ├── HomePage.tsx
+│   │   ├── VarietiesPage.tsx
+│   │   └── ContactPage.tsx
+│   ├── data/
+│   │   ├── varieties.ts
+│   │   └── packages.ts
+│   ├── styles/
+│   │   └── globals.css
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── vite-env.d.ts
+├── tailwind.config.js
+├── vite.config.ts
+├── package.json
+└── tsconfig.json
