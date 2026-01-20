@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Varietas Bibit Cabai - BibitCabai</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-text">Bibit<span>Cabai</span></div>
+                </div>
+            </a>
+            
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="index.html" class="nav-link">Beranda</a></li>
+                    <li><a href="varietas-bibit.html" class="nav-link active">Varietas Bibit</a></li>
+                    <li><a href="kontak.html" class="nav-link">Kontak</a></li>
+                </ul>
+            </nav>
+            
+            <a href="https://wa.me/628984338479?text=Halo%20BibitCabai,%20saya%20ingin%20pesan%20bibit%20cabai" class="order-now-btn" target="_blank">
+                <i class="fab fa-whatsapp"></i> Pesan Sekarang
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" style="background: linear-gradient(135deg, rgba(255, 152, 0, 0.85), rgba(255, 152, 0, 0.9)), url('https://images.unsplash.com/photo-1560493676-04071c5f467b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80'); background-size: cover; background-position: center;">
+        <div class="container">
+            <h1 class="fade-in-up">Varietas Bibit Cabai</h1>
+            <p class="fade-in-up" style="animation-delay: 0.2s;">Kami menyediakan berbagai varietas bibit cabai dengan karakteristik unggulan masing-masing untuk kebutuhan budidaya Anda.</p>
+        </div>
+    </section>
+
+    <!-- Varietas Content -->
+    <section class="varietas-content">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Pilihan Varietas Terlengkap</h2>
+                <p>Setiap varietas memiliki keunggulan tersendiri yang cocok untuk kondisi lahan dan pasar yang berbeda.</p>
+            </div>
+            
+            <div class="bibit-container" id="bibitContainer">
+                <!-- Varietas bibit akan diisi oleh JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>BibitCabai</h3>
+                    <p>Spesialis bibit cabai unggul dengan kualitas premium untuk mendukung kesuksesan pertanian Indonesia.</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Menu Utama</h3>
+                    <ul>
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="varietas-bibit.html" class="active">Varietas Bibit</a></li>
+                        <li><a href="kontak.html">Kontak</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Hubungi Kami</h3>
+                    <ul>
+                        <li><a href="https://wa.me/628984338479" target="_blank"><i class="fab fa-whatsapp"></i> 0898-4338-479</a></li>
+                        <li><a href="mailto:info@bibitcabai.com"><i class="fas fa-envelope"></i> info@bibitcabai.com</a></li>
+                        <li><a href="https://instagram.com/BibitCabai.id" target="_blank"><i class="fab fa-instagram"></i> @BibitCabai.id</a></li>
+                        <li><i class="fas fa-map-marker-alt"></i> Temanggung, Jawa Tengah</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 BibitCabai. Hak Cipta Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/bibit.js"></script>
+    <script>
+        // Override fungsi renderBibit untuk menambahkan gambar
+        const originalRenderBibit = renderBibit;
+        
+        renderBibit = function() {
+            const container = document.getElementById('bibitContainer');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            // Data varietas dengan gambar
+            const varietasData = [
+                {
+                    id: 1,
+                    nama: "Cabai Merah Keriting",
+                    deskripsi: "Varietas unggulan dengan buah keriting, tingkat kepedasan tinggi, dan hasil panen melimpah. Cocok untuk bumbu masakan khas Indonesia.",
+                    icon: "fas fa-pepper-hot",
+                    gambar: "image/cabai-merah-keriting.jpg"
+                },
+                {
+                    id: 2,
+                    nama: "Cabai Rawit Hijau",
+                    deskripsi: "Rawit dengan buah lebat, tahan cuaca ekstrem, dan rasa pedas menyengat. Umur panen relatif cepat dan adaptif di berbagai kondisi.",
+                    icon: "fas fa-fire",
+                    gambar: "image/cabai-rawit-hijau.jpg"
+                },
+                {
+                    id: 3,
+                    nama: "Cabai Besar Hibrida",
+                    deskripsi: "Hibrida unggul dengan buah besar, tebal daging, cocok untuk pasar modern. Produktivitas tinggi dengan ketahanan penyakit yang baik.",
+                    icon: "fas fa-apple-alt",
+                    gambar: "image/cabai-besar-hibrida.jpg"
+                },
+                {
+                    id: 4,
+                    nama: "Cabai Paprika",
+                    deskripsi: "Paprika warna-warni (merah, kuning, hijau) untuk kebutuhan kuliner dan industri makanan sehat. Rasa manis renyah dengan nilai jual tinggi.",
+                    icon: "fas fa-pepper-hot",
+                    gambar: "image/cabai-paprika.jpg"
+                },
+                {
+                    id: 5,
+                    nama: "Cabai Jalapeno",
+                    deskripsi: "Cabai asal Meksiko dengan rasa pedas sedang, cocok untuk saus, acar, dan makanan western. Permintaan pasar restoran terus meningkat.",
+                    icon: "fas fa-pepper-hot",
+                    gambar: "image/cabai-jalapeno.jpg"
+                },
+                {
+                    id: 6,
+                    nama: "Cabai Hias",
+                    deskripsi: "Cabai ornamental dengan penampilan menarik, cocok untuk tabulampot dan taman. Buah warna-warni (ungu, oranye, merah) yang estetik.",
+                    icon: "fas fa-seedling",
+                    gambar: "image/cabai-hias.jpg"
+                },
+                {
+                    id: 7,
+                    nama: "Cabai Keriting Lokal",
+                    deskripsi: "Varietas lokal adaptif dengan aroma khas, tahan terhadap kondisi lahan marginal. Cocok untuk lahan kering dengan perawatan minimal.",
+                    icon: "fas fa-leaf",
+                    gambar: "image/cabai-keriting-lokal.jpg"
+                },
+                {
+                    id: 8,
+                    nama: "Cabai Rawit Putih",
+                    deskripsi: "Rawit putih dengan tingkat kepedasan ekstrem, permintaan tinggi untuk industri. Warna putih krem dengan kandungan capsaicin tinggi.",
+                    icon: "fas fa-fire",
+                    gambar: "image/cabai-rawit-putih.jpg"
+                },
+                {
+                    id: 9,
+                    nama: "Cabai Merah Besar",
+                    deskripsi: "Buah besar dengan daging tebal, cocok untuk sambal dan bumbu halus. Warna merah cerah menarik dengan hasil panen konsisten.",
+                    icon: "fas fa-apple-alt",
+                    gambar: "image/cabai-merah-besar.jpg"
+                },
+                {
+                    id: 10,
+                    nama: "Cabai Tahan Layu",
+                    deskripsi: "Rekayasa khusus tahan penyakit layu bakteri dan fusarium, umur panjang. Solusi untuk daerah endemik penyakit layu.",
+                    icon: "fas fa-shield-alt",
+                    gambar: "image/cabai-tahan-layu.jpg"
+                }
+            ];
+            
+            varietasData.forEach((bibit, index) => {
+                const bibitCard = document.createElement('div');
+                bibitCard.className = 'bibit-card fade-in';
+                bibitCard.style.animationDelay = `${0.1 * index}s`;
+                
+                bibitCard.innerHTML = `
+                    <div class="bibit-img">
+                        <img src="${bibit.gambar}" alt="${bibit.nama}" loading="lazy">
+                        <div class="bibit-icon">
+                            <i class="${bibit.icon}"></i>
+                        </div>
+                    </div>
+                    <div class="bibit-info">
+                        <h3>${bibit.nama}</h3>
+                        <p>${bibit.deskripsi}</p>
+                        <a href="https://wa.me/628984338479?text=Halo%20BibitCabai,%20saya%20tertarik%20dengan%20varietas%20${encodeURIComponent(bibit.nama)}" class="btn btn-primary" target="_blank">Konsultasi Gratis</a>
+                    </div>
+                `;
+                
+                container.appendChild(bibitCard);
+            });
+        };
+        
+        // Panggil fungsi setelah DOM siap
+        document.addEventListener('DOMContentLoaded', renderBibit);
+    </script>
+</body>
+</html>

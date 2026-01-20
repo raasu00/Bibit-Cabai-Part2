@@ -1,1 +1,270 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BibitCabai - Solusi Perbibitan Cabai Unggul</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        /* Tambahan style untuk tombol ganda */
+        .paket-button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .paket-button-group .btn {
+            width: 100%;
+            text-align: center;
+            justify-content: center;
+            padding: 12px 15px;
+        }
+        
+        .btn-hubungi {
+            background-color: var(--primary);
+            color: white;
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-hubungi:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+        
+        /* Untuk desktop */
+        @media (min-width: 577px) {
+            .paket-button-group {
+                flex-direction: row;
+            }
+            
+            .paket-button-group .btn {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-text">Bibit<span>Cabai</span></div>
+                </div>
+            </a>
+            
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="index.html" class="nav-link active">Beranda</a></li>
+                    <li><a href="varietas-bibit.html" class="nav-link">Varietas Bibit</a></li>
+                    <li><a href="kontak.html" class="nav-link">Kontak</a></li>
+                </ul>
+            </nav>
+            
+            <a href="https://wa.me/628984338479?text=Halo%20BibitCabai,%20saya%20ingin%20pesan%20bibit%20cabai" class="order-now-btn" target="_blank">
+                <i class="fab fa-whatsapp"></i> Pesan Sekarang
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
 
+    <!-- Hero Section -->
+    <section class="hero fade-in">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="fade-in-up">Bibit Cabai Unggul untuk Hasil Panen Melimpah</h1>
+                <p class="fade-in-up" style="animation-delay: 0.2s;">Spesialis penyedia bibit cabai berkualitas tinggi dengan varietas terlengkap untuk petani Indonesia.</p>
+                <!-- Tombol dihapus sesuai permintaan -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Home Content -->
+    <section class="home-content">
+        <div class="container">
+            <div class="toko-description fade-in">
+                <h2>Selamat Datang di BibitCabai</h2>
+                <p>BibitCabai adalah perusahaan perbibitan cabai yang berkomitmen untuk menyediakan bibit cabai berkualitas tinggi dengan varietas unggulan yang telah teruji di lapangan. Kami hadir untuk membantu petani Indonesia meningkatkan produktivitas dan kualitas hasil panen cabai.</p>
+            </div>
+            
+            <div class="section-title fade-in">
+                <h2>Paket yang Tersedia</h2>
+                <p>Pilih paket yang sesuai dengan kebutuhan budidaya cabai Anda.</p>
+            </div>
+            
+            <div class="paket-container">
+                <div class="paket-card fade-in" style="animation-delay: 0.1s;">
+                    <div class="paket-img">
+                        <img src="image/paket-petani-pemula.jpg" alt="Paket Petani Pemula">
+                    </div>
+                    <div class="paket-header" style="background-color: var(--primary-dark);">
+                        <h3>Paket Petani Pemula</h3>
+                        <div class="harga">Rp 250.000</div>
+                        <p>Untuk 100 bibit</p>
+                    </div>
+                    <div class="paket-body">
+                        <ul>
+                            <li><i class="fas fa-check"></i> 2 Varietas cabai pilihan</li>
+                            <li><i class="fas fa-check"></i> Bibit usia 21 hari siap tanam</li>
+                            <li><i class="fas fa-check"></i> Konsultasi via WhatsApp 1 bulan</li>
+                            <li><i class="fas fa-check"></i> Bonus pupuk organik 5 kg</li>
+                        </ul>
+                        <div class="paket-button-group">
+                            <a href="https://wa.me/628984338479?text=Halo%20BibitCabai,%20saya%20ingin%20pesan%20Paket%20Petani%20Pemula" class="btn" target="_blank">
+                                <i class="fab fa-whatsapp"></i> Pesan Sekarang
+                            </a>
+                            <a href="kontak.html" class="btn btn-hubungi">
+                                <i class="fas fa-phone"></i> Hubungi Kami
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="paket-card fade-in" style="animation-delay: 0.2s;">
+                    <div class="paket-img">
+                        <img src="image/paket-petani-professional.jpg" alt="Paket Petani Professional">
+                    </div>
+                    <div class="paket-header" style="background-color: var(--accent);">
+                        <h3>Paket Petani Professional</h3>
+                        <div class="harga">Rp 2.500.000</div>
+                        <p>Untuk 1250 bibit</p>
+                    </div>
+                    <div class="paket-body">
+                        <ul>
+                            <li><i class="fas fa-check"></i> 5 Varietas cabai unggulan</li>
+                            <li><i class="fas fa-check"></i> Bibit usia 21 hari siap tanam</li>
+                            <li><i class="fas fa-check"></i> Konsultasi dengan ahli 2 bulan</li>
+                            <li><i class="fas fa-check"></i> Bonus pupuk organik 10 kg</li>
+                            <li><i class="fas fa-check"></i> Akses ke grup petani</li>
+                        </ul>
+                        <div class="paket-button-group">
+                            <a href="https://wa.me/628984338479?text=Halo%20BibitCabai,%20saya%20ingin%20pesan%20Paket%20Petani%20Professional" class="btn" target="_blank">
+                                <i class="fab fa-whatsapp"></i> Pesan Sekarang
+                            </a>
+                            <a href="kontak.html" class="btn btn-hubungi">
+                                <i class="fas fa-phone"></i> Hubungi Kami
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-title fade-in" style="margin-top: 80px;">
+                <h2>Varietas Unggulan</h2>
+                <p>Beberapa varietas bibit cabai terbaik yang kami sediakan</p>
+            </div>
+            
+            <div class="bibit-container" id="homeBibitContainer">
+                <!-- Varietas unggulan dengan gambar -->
+            </div>
+            
+            <div class="text-center fade-in" style="margin-top: 40px;">
+                <a href="varietas-bibit.html" class="btn btn-primary">Lihat Semua Varietas</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>BibitCabai</h3>
+                    <p>Spesialis bibit cabai unggul dengan kualitas premium untuk mendukung kesuksesan pertanian Indonesia.</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Menu Utama</h3>
+                    <ul>
+                        <li><a href="index.html" class="active">Beranda</a></li>
+                        <li><a href="varietas-bibit.html">Varietas Bibit</a></li>
+                        <li><a href="kontak.html">Kontak</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Hubungi Kami</h3>
+                    <ul>
+                        <li><a href="https://wa.me/628984338479" target="_blank"><i class="fab fa-whatsapp"></i> 0898-4338-479</a></li>
+                        <li><a href="mailto:info@bibitcabai.com"><i class="fas fa-envelope"></i> info@bibitcabai.com</a></li>
+                        <li><a href="https://instagram.com/BibitCabai.id" target="_blank"><i class="fab fa-instagram"></i> @BibitCabai.id</a></li>
+                        <li><i class="fas fa-map-marker-alt"></i> Temanggung, Jawa Tengah</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 BibitCabai. Hak Cipta Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Data varietas untuk halaman beranda (4 varietas dengan gambar)
+        const homeBibitData = [
+            {
+                id: 1,
+                nama: "Cabai Merah Keriting",
+                deskripsi: "Varietas unggulan dengan buah keriting, tingkat kepedasan tinggi, dan hasil panen melimpah.",
+                icon: "fas fa-pepper-hot",
+                gambar: "image/cabai-merah-keriting.jpg"
+            },
+            {
+                id: 2,
+                nama: "Cabai Rawit Hijau",
+                deskripsi: "Rawit dengan buah lebat, tahan cuaca ekstrem, dan rasa pedas menyengat.",
+                icon: "fas fa-fire",
+                gambar: "image/cabai-rawit-hijau.jpg"
+            },
+            {
+                id: 3,
+                nama: "Cabai Besar Hibrida",
+                deskripsi: "Hibrida unggul dengan buah besar, tebal daging, cocok untuk pasar modern.",
+                icon: "fas fa-apple-alt",
+                gambar: "image/cabai-besar-hibrida.jpg"
+            },
+            {
+                id: 4,
+                nama: "Cabai Rawit Putih",
+                deskripsi: "Rawit putih dengan tingkat kepedasan ekstrem, permintaan tinggi untuk industri.",
+                icon: "fas fa-fire",
+                gambar: "image/cabai-rawit-putih.jpg"
+            }
+        ];
+
+        // Render varietas di halaman beranda
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('homeBibitContainer');
+            
+            homeBibitData.forEach((bibit, index) => {
+                const bibitCard = document.createElement('div');
+                bibitCard.className = 'bibit-card fade-in';
+                bibitCard.style.animationDelay = `${0.1 * index}s`;
+                
+                bibitCard.innerHTML = `
+                    <div class="bibit-img">
+                        <img src="${bibit.gambar}" alt="${bibit.nama}" loading="lazy">
+                        <div class="bibit-icon">
+                            <i class="${bibit.icon}"></i>
+                        </div>
+                    </div>
+                    <div class="bibit-info">
+                        <h3>${bibit.nama}</h3>
+                        <p>${bibit.deskripsi}</p>
+                        <a href="varietas-bibit.html" class="btn btn-primary">Selengkapnya</a>
+                    </div>
+                `;
+                
+                container.appendChild(bibitCard);
+            });
+        });
+    </script>
+</body>
+</html>

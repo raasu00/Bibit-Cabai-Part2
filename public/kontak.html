@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak - BibitCabai</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        /* Style tambahan untuk kontak page */
+        .contact-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .contact-section {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-section h3 {
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary);
+        }
+        
+        .contact-info-list {
+            list-style: none;
+        }
+        
+        .contact-info-list li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        
+        .contact-info-list li i {
+            color: var(--primary);
+            font-size: 1.2rem;
+            min-width: 24px;
+            text-align: center;
+            margin-top: 2px;
+        }
+        
+        .contact-info-list li strong {
+            display: block;
+            color: var(--dark);
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+        
+        .contact-info-list li span {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+        
+        .contact-info-list li a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .contact-info-list li a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+        
+        .area-layanan {
+            margin-top: 30px;
+        }
+        
+        .area-layanan h4 {
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .area-layanan p {
+            color: var(--gray);
+            line-height: 1.6;
+            font-size: 0.95rem;
+            background-color: var(--light-gray);
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        /* Map container styling */
+        .map-container {
+            margin-top: 30px;
+        }
+        
+        .map-info {
+            margin-bottom: 15px;
+        }
+        
+        .map-info h3 {
+            color: var(--primary-dark);
+            font-size: 1.4rem;
+        }
+        
+        .whatsapp-contact {
+            background-color: #25D366;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .whatsapp-contact strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .whatsapp-contact p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-text">Bibit<span>Cabai</span></div>
+                </div>
+            </a>
+            
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="index.html" class="nav-link">Beranda</a></li>
+                    <li><a href="varietas-bibit.html" class="nav-link">Varietas Bibit</a></li>
+                    <li><a href="kontak.html" class="nav-link active">Kontak</a></li>
+                </ul>
+            </nav>
+            
+            <a href="https://wa.me/628984338479?text=Halo%20BibitCabai,%20saya%20ingin%20pesan%20bibit%20cabai" class="order-now-btn" target="_blank">
+                <i class="fab fa-whatsapp"></i> Pesan Sekarang
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" style="background: linear-gradient(135deg, rgba(76, 175, 80, 0.85), rgba(76, 175, 80, 0.9)), url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80'); background-size: cover; background-position: center;">
+        <div class="container">
+            <h1 class="fade-in-up">Hubungi Kami</h1>
+            <p class="fade-in-up" style="animation-delay: 0.2s;">Kami siap membantu Anda dengan konsultasi gratis dan informasi lengkap tentang bibit cabai unggulan.</p>
+        </div>
+    </section>
+
+    <!-- Kontak Content -->
+    <section class="kontak-content">
+        <div class="container">
+            <!-- Kontak Informasi Grid -->
+            <div class="contact-sections">
+                <!-- Informasi Kontak -->
+                <div class="contact-section fade-in">
+                    <h3><i class="fas fa-address-card"></i> Informasi Kontak</h3>
+                    <ul class="contact-info-list">
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <strong>Telepon</strong>
+                                <span><a href="tel:08984338479">0898-4338-479</a></span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <strong>Email</strong>
+                                <span><a href="mailto:info@bibitcabai.com">info@bibitcabai.com</a></span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-globe"></i>
+                            <div>
+                                <strong>Website</strong>
+                                <span><a href="https://bibit-cabai.vercel.app" target="_blank">bibit-cabai.vercel.app</a></span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fab fa-instagram"></i>
+                            <div>
+                                <strong>Instagram</strong>
+                                <span><a href="https://instagram.com/BibitCabai.id" target="_blank">@BibitCabai.id</a></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Jam Operasional -->
+                <div class="contact-section fade-in" style="animation-delay: 0.1s;">
+                    <h3><i class="fas fa-clock"></i> Jam Operasional</h3>
+                    <ul class="contact-info-list">
+                        <li>
+                            <i class="far fa-calendar-alt"></i>
+                            <div>
+                                <strong>Senin - Jumat</strong>
+                                <span>09:00 - 17:00 WIB</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="far fa-calendar-alt"></i>
+                            <div>
+                                <strong>Sabtu - Minggu</strong>
+                                <span>09:00 - 15:00 WIB</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fab fa-whatsapp"></i>
+                            <div>
+                                <strong>WhatsApp</strong>
+                                <span>19/7 (19 jam selama 7 hari)</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Lokasi & Layanan -->
+                <div class="contact-section fade-in" style="animation-delay: 0.2s;">
+                    <h3><i class="fas fa-map-marker-alt"></i> Lokasi & Layanan</h3>
+                    <ul class="contact-info-list">
+                        <li>
+                            <i class="fas fa-map-pin"></i>
+                            <div>
+                                <strong>Lokasi</strong>
+                                <span>Temanggung, Jawa Tengah, Indonesia</span>
+                            </div>
+                        </li>
+                    </ul>
+                    
+                    <div class="area-layanan">
+                        <h4><i class="fas fa-truck"></i> Layanan Pengiriman</h4>
+                        <p>Kami melayani pesan antar di area:<br>
+                        • Temanggung-Magelang<br>
+                        • Temanggung-Semarang<br>
+                        • Temanggung-Pekalongan</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Peta Lokasi -->
+            <div class="map-container fade-in" style="animation-delay: 0.3s;">
+                <div class="map-info">
+                    <h3><i class="fas fa-map"></i> Lokasi Pembibitan Kami</h3>
+                </div>
+                <p style="color: var(--gray); margin-bottom: 20px; font-size: 1.1rem;">
+                    Temukan lokasi pembibitan kami di Google Maps.
+                </p>
+                
+                <!-- Google Maps Embed -->
+                <div style="border-radius: 10px; overflow: hidden; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.9853962497696!2d110.16877677467236!3d-7.063491092939174!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e708b4d3f0d024d%3A0x1e7792a2a326d3f5!2sTemanggung%2C%20Jawa%20Tengah%2C%20Indonesia!5e0!3m2!1sen!2sus!4v1647856789015!5m2!1sen!2sus" 
+                        width="100%" 
+                        height="400" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                
+                <!-- Tombol Google Maps -->
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="https://maps.app.goo.gl/wQ82XwyLNZpqGcN49" class="btn btn-primary" target="_blank" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <i class="fab fa-google"></i> Buka di Google Maps
+                    </a>
+                </div>
+            </div>
+            
+            <!-- CTA Section -->
+            <div class="text-center fade-in" style="margin-top: 50px; padding: 40px; background: linear-gradient(135deg, var(--primary-light), var(--primary)); border-radius: 10px; color: white;">
+                <h2 style="color: white; margin-bottom: 15px;">Siap Memulai Budidaya Cabai?</h2>
+                <p style="color: rgba(255,255,255,0.9); margin-bottom: 25px; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    Hubungi kami sekarang untuk konsultasi gratis dan pemesanan bibit cabai unggulan.
+                </p>
+                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://wa.me/628984338479?text=Halo%20BibitCabai,%20saya%20ingin%20pesan%20bibit%20cabai" class="btn" target="_blank" style="background-color: white; color: var(--primary);">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>BibitCabai</h3>
+                    <p>Spesialis bibit cabai unggul dengan kualitas premium untuk mendukung kesuksesan pertanian Indonesia.</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Menu Utama</h3>
+                    <ul>
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="varietas-bibit.html">Varietas Bibit</a></li>
+                        <li><a href="kontak.html" class="active">Kontak</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Hubungi Kami</h3>
+                    <ul>
+                        <li><a href="https://wa.me/628984338479" target="_blank"><i class="fab fa-whatsapp"></i> 0898-4338-479</a></li>
+                        <li><a href="mailto:info@bibitcabai.com"><i class="fas fa-envelope"></i> info@bibitcabai.com</a></li>
+                        <li><a href="https://instagram.com/BibitCabai.id" target="_blank"><i class="fab fa-instagram"></i> @BibitCabai.id</a></li>
+                        <li><i class="fas fa-map-marker-alt"></i> Temanggung, Jawa Tengah</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 BibitCabai. Hak Cipta Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
