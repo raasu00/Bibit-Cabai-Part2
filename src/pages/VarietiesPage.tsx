@@ -179,3 +179,67 @@ export const VarietiesPage: React.FC = () => {
               <div className="flex items-center gap-1">
                 <TrendingUp className="w-4 h-4" />
                 <span>Produktivitas Tinggi</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <Sun className="w-4 h-4" />
+                <span>Adaptif</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Varieties Grid */}
+          {filteredVarieties.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {filteredVarieties.map((variety) => (
+                <ProductCard 
+                  key={variety.id} 
+                  variety={variety} 
+                  showDetails={true}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <div className="w-20 h-20 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
+                <Search className="w-10 h-10 text-gray-400" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">
+                Varietas Tidak Ditemukan
+              </h3>
+              <p className="text-gray-600 mb-6">
+                Coba gunakan filter yang berbeda atau reset filter
+              </p>
+              <button
+                onClick={resetFilters}
+                className="btn btn-primary"
+              >
+                Reset Filter
+              </button>
+            </div>
+          )}
+
+          {/* CTA */}
+          <div className="mt-12 text-center">
+            <div className="bg-gradient-to-r from-agriculture-50 to-orange-50 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                Butuh Rekomendasi Khusus?
+              </h3>
+              <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+                Tim ahli kami siap membantu memilih varietas yang paling cocok 
+                untuk kondisi lahan dan pasar Anda.
+              </p>
+              <a
+                href="https://wa.me/628984338479"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-whatsapp px-8 py-4 text-lg inline-flex items-center gap-3"
+              >
+                💬 Konsultasi Gratis dengan Ahli
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </Layout>
+  );
+};
