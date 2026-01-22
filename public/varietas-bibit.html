@@ -7,6 +7,87 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        /* Style tambahan untuk tombol video */
+        .btn-video {
+            background-color: #FF0000;
+            color: white;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 10px;
+            text-decoration: none;
+        }
+        
+        .btn-video:hover {
+            background-color: #CC0000;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 0, 0, 0.2);
+        }
+        
+        .btn-video i {
+            font-size: 1.2rem;
+        }
+        
+        .bibit-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .btn-primary {
+            flex: 1;
+            min-width: 160px;
+        }
+        
+        .btn-video {
+            flex: 1;
+            min-width: 140px;
+            justify-content: center;
+        }
+        
+        /* Video badge */
+        .video-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(255, 0, 0, 0.9);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            z-index: 2;
+        }
+        
+        .bibit-img {
+            position: relative;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .bibit-actions {
+                flex-direction: column;
+            }
+            
+            .btn-primary, .btn-video {
+                width: 100%;
+                margin-left: 0;
+                text-align: center;
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header & Navigation -->
@@ -22,6 +103,7 @@
                 <ul id="navMenu">
                     <li><a href="index.html" class="nav-link">Beranda</a></li>
                     <li><a href="varietas-bibit.html" class="nav-link active">Varietas Bibit</a></li>
+                    <li><a href="video-cabai.html" class="nav-link"><i class="fab fa-youtube"></i> Video</a></li>
                     <li><a href="kontak.html" class="nav-link">Kontak</a></li>
                 </ul>
             </nav>
@@ -40,7 +122,12 @@
     <section class="hero" style="background: linear-gradient(135deg, rgba(255, 152, 0, 0.85), rgba(255, 152, 0, 0.9)), url('https://images.unsplash.com/photo-1560493676-04071c5f467b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80'); background-size: cover; background-position: center;">
         <div class="container">
             <h1 class="fade-in-up">Varietas Bibit Cabai</h1>
-            <p class="fade-in-up" style="animation-delay: 0.2s;">Kami menyediakan berbagai varietas bibit cabai dengan karakteristik unggulan masing-masing untuk kebutuhan budidaya Anda.</p>
+            <p class="fade-in-up" style="animation-delay: 0.2s;">Kami menyediakan berbagai varietas bibit cabai dengan karakteristik unggulan masing-masing untuk kebutuhan budidaya Anda. <strong>Kini dengan video tutorial!</strong></p>
+            <div class="text-center fade-in-up" style="animation-delay: 0.3s; margin-top: 20px;">
+                <a href="video-cabai.html" class="btn btn-video">
+                    <i class="fab fa-youtube"></i> Lihat Semua Video
+                </a>
+            </div>
         </div>
     </section>
 
@@ -49,7 +136,7 @@
         <div class="container">
             <div class="section-title fade-in">
                 <h2>Pilihan Varietas Terlengkap</h2>
-                <p>Setiap varietas memiliki keunggulan tersendiri yang cocok untuk kondisi lahan dan pasar yang berbeda.</p>
+                <p>Setiap varietas memiliki keunggulan tersendiri yang cocok untuk kondisi lahan dan pasar yang berbeda. <strong>Klik tombol video untuk melihat tutorial budidaya!</strong></p>
             </div>
             
             <div class="bibit-container" id="bibitContainer">
@@ -72,6 +159,7 @@
                     <ul>
                         <li><a href="index.html">Beranda</a></li>
                         <li><a href="varietas-bibit.html" class="active">Varietas Bibit</a></li>
+                        <li><a href="video-cabai.html"><i class="fab fa-youtube"></i> Video Tutorial</a></li>
                         <li><a href="kontak.html">Kontak</a></li>
                     </ul>
                 </div>
@@ -94,90 +182,107 @@
     </footer>
 
     <script src="js/main.js"></script>
-    <script src="js/bibit.js"></script>
     <script>
-        // Override fungsi renderBibit untuk menambahkan gambar
-        const originalRenderBibit = renderBibit;
+        // Data varietas dengan gambar dan link video
+        const varietasData = [
+            {
+                id: 1,
+                nama: "Cabai Merah Keriting",
+                deskripsi: "Varietas unggulan dengan buah keriting, tingkat kepedasan tinggi, dan hasil panen melimpah. Cocok untuk bumbu masakan khas Indonesia.",
+                icon: "fas fa-pepper-hot",
+                gambar: "image/cabai-merah-keriting.jpg",
+                videoUrl: "https://www.youtube.com/watch?v=Zbh0z1L4itM",
+                videoId: "Zbh0z1L4itM"
+            },
+            {
+                id: 2,
+                nama: "Cabai Rawit Hijau",
+                deskripsi: "Rawit dengan buah lebat, tahan cuaca ekstrem, dan rasa pedas menyengat. Umur panen relatif cepat dan adaptif di berbagai kondisi.",
+                icon: "fas fa-fire",
+                gambar: "image/cabai-rawit-hijau.jpg",
+                videoUrl: "https://www.youtube.com/watch?v=lsnmmK8O2W0",
+                videoId: "lsnmmK8O2W0"
+            },
+            {
+                id: 3,
+                nama: "Cabai Besar Hibrida",
+                deskripsi: "Hibrida unggul dengan buah besar, tebal daging, cocok untuk pasar modern. Produktivitas tinggi dengan ketahanan penyakit yang baik.",
+                icon: "fas fa-apple-alt",
+                gambar: "image/cabai-besar-hibrida.jpg",
+                videoUrl: "https://www.youtube.com/watch?v=0auxQtToims",
+                videoId: "0auxQtToims"
+            },
+            {
+                id: 4,
+                nama: "Cabai Paprika",
+                deskripsi: "Paprika warna-warni (merah, kuning, hijau) untuk kebutuhan kuliner dan industri makanan sehat. Rasa manis renyah dengan nilai jual tinggi.",
+                icon: "fas fa-pepper-hot",
+                gambar: "image/cabai-paprika.jpg",
+                videoUrl: "https://www.youtube.com/watch?v=d8Uqx3qLU-s",
+                videoId: "d8Uqx3qLU-s"
+            },
+            {
+                id: 5,
+                nama: "Cabai Jalapeno",
+                deskripsi: "Cabai asal Meksiko dengan rasa pedas sedang, cocok untuk saus, acar, dan makanan western. Permintaan pasar restoran terus meningkat.",
+                icon: "fas fa-pepper-hot",
+                gambar: "image/cabai-jalapeno.jpg",
+                videoUrl: "https://www.youtube.com/watch?v=kwTHui3h6JY",
+                videoId: "kwTHui3h6JY"
+            },
+            {
+                id: 6,
+                nama: "Cabai Hias",
+                deskripsi: "Cabai ornamental dengan penampilan menarik, cocok untuk tabulampot dan taman. Buah warna-warni (ungu, oranye, merah) yang estetik.",
+                icon: "fas fa-seedling",
+                gambar: "image/cabai-hias.jpg",
+                videoUrl: "https://www.youtube.com/shorts/VituHatRIsY",
+                videoId: "VituHatRIsY"
+            },
+            {
+                id: 7,
+                nama: "Cabai Keriting Lokal",
+                deskripsi: "Varietas lokal adaptif dengan aroma khas, tahan terhadap kondisi lahan marginal. Cocok untuk lahan kering dengan perawatan minimal.",
+                icon: "fas fa-leaf",
+                gambar: "image/cabai-keriting-lokal.jpg",
+                videoUrl: "https://www.youtube.com/watch?v=jA80HZWg4B8",
+                videoId: "jA80HZWg4B8"
+            },
+            {
+                id: 8,
+                nama: "Cabai Rawit Putih",
+                deskripsi: "Rawit putih dengan tingkat kepedasan ekstrem, permintaan tinggi untuk industri. Warna putih krem dengan kandungan capsaicin tinggi.",
+                icon: "fas fa-fire",
+                gambar: "image/cabai-rawit-putih.jpg",
+                videoUrl: "https://www.youtube.com/watch?v=KGdVuqbxcBM",
+                videoId: "KGdVuqbxcBM"
+            },
+            {
+                id: 9,
+                nama: "Cabai Merah Besar",
+                deskripsi: "Buah besar dengan daging tebal, cocok untuk sambal dan bumbu halus. Warna merah cerah menarik dengan hasil panen konsisten.",
+                icon: "fas fa-apple-alt",
+                gambar: "image/cabai-merah-besar.jpg",
+                videoUrl: "https://www.youtube.com/watch?v=YmL7ywgYv5Y",
+                videoId: "YmL7ywgYv5Y"
+            },
+            {
+                id: 10,
+                nama: "Cabai Tahan Layu",
+                deskripsi: "Rekayasa khusus tahan penyakit layu bakteri dan fusarium, umur panjang. Solusi untuk daerah endemik penyakit layu.",
+                icon: "fas fa-shield-alt",
+                gambar: "image/cabai-tahan-layu.jpg",
+                videoUrl: "https://www.youtube.com/watch?v=RnMbb1lQSMQ",
+                videoId: "RnMbb1lQSMQ"
+            }
+        ];
         
-        renderBibit = function() {
+        // Fungsi render bibit dengan video link
+        function renderBibit() {
             const container = document.getElementById('bibitContainer');
             if (!container) return;
             
             container.innerHTML = '';
-            
-            // Data varietas dengan gambar
-            const varietasData = [
-                {
-                    id: 1,
-                    nama: "Cabai Merah Keriting",
-                    deskripsi: "Varietas unggulan dengan buah keriting, tingkat kepedasan tinggi, dan hasil panen melimpah. Cocok untuk bumbu masakan khas Indonesia.",
-                    icon: "fas fa-pepper-hot",
-                    gambar: "image/cabai-merah-keriting.jpg"
-                },
-                {
-                    id: 2,
-                    nama: "Cabai Rawit Hijau",
-                    deskripsi: "Rawit dengan buah lebat, tahan cuaca ekstrem, dan rasa pedas menyengat. Umur panen relatif cepat dan adaptif di berbagai kondisi.",
-                    icon: "fas fa-fire",
-                    gambar: "image/cabai-rawit-hijau.jpg"
-                },
-                {
-                    id: 3,
-                    nama: "Cabai Besar Hibrida",
-                    deskripsi: "Hibrida unggul dengan buah besar, tebal daging, cocok untuk pasar modern. Produktivitas tinggi dengan ketahanan penyakit yang baik.",
-                    icon: "fas fa-apple-alt",
-                    gambar: "image/cabai-besar-hibrida.jpg"
-                },
-                {
-                    id: 4,
-                    nama: "Cabai Paprika",
-                    deskripsi: "Paprika warna-warni (merah, kuning, hijau) untuk kebutuhan kuliner dan industri makanan sehat. Rasa manis renyah dengan nilai jual tinggi.",
-                    icon: "fas fa-pepper-hot",
-                    gambar: "image/cabai-paprika.jpg"
-                },
-                {
-                    id: 5,
-                    nama: "Cabai Jalapeno",
-                    deskripsi: "Cabai asal Meksiko dengan rasa pedas sedang, cocok untuk saus, acar, dan makanan western. Permintaan pasar restoran terus meningkat.",
-                    icon: "fas fa-pepper-hot",
-                    gambar: "image/cabai-jalapeno.jpg"
-                },
-                {
-                    id: 6,
-                    nama: "Cabai Hias",
-                    deskripsi: "Cabai ornamental dengan penampilan menarik, cocok untuk tabulampot dan taman. Buah warna-warni (ungu, oranye, merah) yang estetik.",
-                    icon: "fas fa-seedling",
-                    gambar: "image/cabai-hias.jpg"
-                },
-                {
-                    id: 7,
-                    nama: "Cabai Keriting Lokal",
-                    deskripsi: "Varietas lokal adaptif dengan aroma khas, tahan terhadap kondisi lahan marginal. Cocok untuk lahan kering dengan perawatan minimal.",
-                    icon: "fas fa-leaf",
-                    gambar: "image/cabai-keriting-lokal.jpg"
-                },
-                {
-                    id: 8,
-                    nama: "Cabai Rawit Putih",
-                    deskripsi: "Rawit putih dengan tingkat kepedasan ekstrem, permintaan tinggi untuk industri. Warna putih krem dengan kandungan capsaicin tinggi.",
-                    icon: "fas fa-fire",
-                    gambar: "image/cabai-rawit-putih.jpg"
-                },
-                {
-                    id: 9,
-                    nama: "Cabai Merah Besar",
-                    deskripsi: "Buah besar dengan daging tebal, cocok untuk sambal dan bumbu halus. Warna merah cerah menarik dengan hasil panen konsisten.",
-                    icon: "fas fa-apple-alt",
-                    gambar: "image/cabai-merah-besar.jpg"
-                },
-                {
-                    id: 10,
-                    nama: "Cabai Tahan Layu",
-                    deskripsi: "Rekayasa khusus tahan penyakit layu bakteri dan fusarium, umur panjang. Solusi untuk daerah endemik penyakit layu.",
-                    icon: "fas fa-shield-alt",
-                    gambar: "image/cabai-tahan-layu.jpg"
-                }
-            ];
             
             varietasData.forEach((bibit, index) => {
                 const bibitCard = document.createElement('div');
@@ -190,17 +295,27 @@
                         <div class="bibit-icon">
                             <i class="${bibit.icon}"></i>
                         </div>
+                        <div class="video-badge">
+                            <i class="fab fa-youtube"></i> Video Tersedia
+                        </div>
                     </div>
                     <div class="bibit-info">
                         <h3>${bibit.nama}</h3>
                         <p>${bibit.deskripsi}</p>
-                        <a href="https://wa.me/628984338479?text=Halo%20BibitCabai,%20saya%20tertarik%20dengan%20varietas%20${encodeURIComponent(bibit.nama)}" class="btn btn-primary" target="_blank">Konsultasi Gratis</a>
+                        <div class="bibit-actions">
+                            <a href="https://wa.me/628984338479?text=Halo%20BibitCabai,%20saya%20tertarik%20dengan%20varietas%20${encodeURIComponent(bibit.nama)}" class="btn btn-primary" target="_blank">
+                                <i class="fab fa-whatsapp"></i> Konsultasi Gratis
+                            </a>
+                            <a href="video-cabai.html?video=${bibit.videoId}&varietas=${encodeURIComponent(bibit.nama)}" class="btn-video">
+                                <i class="fab fa-youtube"></i> Lihat Video
+                            </a>
+                        </div>
                     </div>
                 `;
                 
                 container.appendChild(bibitCard);
             });
-        };
+        }
         
         // Panggil fungsi setelah DOM siap
         document.addEventListener('DOMContentLoaded', renderBibit);
