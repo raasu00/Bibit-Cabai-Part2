@@ -1,245 +1,244 @@
-import React, { useState } from 'react';
-import { HeroSection } from '../components/sections/HeroSection';
-import { ProductCard } from '../components/sections/ProductCard';
-import { Layout } from '../components/layout/Layout';
+import React, { useState, useMemo } from 'react';
+import { FilterSearch } from '../components/sections/FilterSearch';
+import Table from '../components/ui/Table';
 import { varieties } from '../data/varieties';
-import { 
-  Filter, 
-  Search, 
-  TrendingUp, 
-  Flame,
-  Sun,
-  Clock
-} from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
+import { useTheme } from '../context/ThemeContext';
 
-export const VarietiesPage: React.FC = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedDifficulty, setSelectedDifficulty] = useState<string>('');
-  const [spicinessRange, setSpicinessRange] = useState<[number, number]>([1, 10]);
-  const [selectedHarvestTime, setSelectedHarvestTime] = useState<string>('');
+const VarietiesPage: React.FC = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({});
+  const [sortBy, setSortBy] = useState('name');
+  const { t } = useLanguage();
+  const { theme } = useTheme();
 
-  const difficulties = ['Mudah', 'Sedang', 'Sulit'];
-  const harvestTimes = ['60-70 hari', '70-80 hari', '80-90 hari', '90-100 hari'];
+  // Filter and sort varieties
+  const filteredVarieties = useMemo(() => {
+    let result = [...varieties];
 
-  // Filter varieties
-  const filteredVarieties = varieties.filter((variety) => {
-    const matchesSearch = variety.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         variety.description.toLowerCase().includes(searchTerm.toLowerCase());
-    
-    const matchesDifficulty = !selectedDifficulty || variety.difficulty === selectedDifficulty;
-    
-    const matchesSpiciness = variety.spiciness >= spicinessRange[0] && 
-                            variety.spiciness <= spicinessRange[1];
-    
-    const matchesHarvestTime = !selectedHarvestTime || variety.harvestTime === selectedHarvestTime;
-    
-    return matchesSearch && matchesDifficulty && matchesSpiciness && matchesHarvestTime;
-  });
+    // Apply search filter
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      result = result.filter(variety =>
+        variety.name.toLowerCase().includes(query) ||
+        variety.description.toLowerCase().includes(query) ||
+        variety.type.toLowerCase().includes(query)
+      );
+    }
 
-  const resetFilters = () => {
-    setSearchTerm('');
-    setSelectedDifficulty('');
-    setSpicinessRange([1, 10]);
-    setSelectedHarvestTime('');
+    // Apply category filters
+    Object.entries(activeFilters).forEach(([category, values]) => {
+      if (values.length > 0) {
+        result = result.filter(variety => {
+          if (category === 'type') {
+            return values.includes(variety.type);
+          }
+          if (category === 'spiciness') {
+            return values.includes(variety.spiciness);
+          }
+          if (category === 'harvestTime') {
+            if (variety.harvestDays <= 70) return values.includes('fast');
+            if (variety.harvestDays <= 80) return values.includes('medium');
+            return values.includes('slow');
+          }
+          return true;
+        });
+      }
+    });
+
+    // Apply sorting
+    result.sort((a, b) => {
+      switch (sortBy) {
+        case 'price':
+          return a.price - b.price;
+        case 'yield':
+          return b.yieldPerHectare - a.yieldPerHectare;
+        case 'harvestTime':
+          return a.harvestDays - b.harvestDays;
+        default:
+          return a.name.localeCompare(b.name);
+      }
+    });
+
+    return result;
+  }, [searchQuery, activeFilters, sortBy]);
+
+  // Table columns
+  const columns = [
+    {
+      key: 'name',
+      header: t('table.name'),
+      sortable: true,
+      render: (item: typeof varieties[0]) => (
+        <div className="flex items-center">
+          <img
+            src={item.image}
+            alt={item.name}
+            className="w-12 h-12 rounded-lg object-cover mr-4"
+            loading="lazy"
+          />
+          <div>
+            <div className="font-medium text-gray-900 dark:text-white">{item.name}</div>
+            <div className="text-sm text-gray-500 dark:text-gray-400">{item.type}</div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      key: 'spiciness',
+      header: 'Spiciness',
+      render: (item: typeof varieties[0]) => (
+        <div className="flex items-center">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <div
+              key={i}
+              className={`w-3 h-3 rounded-full mx-0.5 ${
+                i < (item.spiciness === 'hot' ? 3 : item.spiciness === 'medium' ? 2 : 1)
+                  ? 'bg-red-500'
+                  : 'bg-gray-300 dark:bg-gray-600'
+              }`}
+            />
+          ))}
+          <span className="ml-2 text-sm capitalize">{item.spiciness}</span>
+        </div>
+      ),
+    },
+    {
+      key: 'harvestDays',
+      header: t('table.harvestTime'),
+      sortable: true,
+      render: (item: typeof varieties[0]) => (
+        <div>
+          <div className="font-medium">{item.harvestDays} days</div>
+          <div className="text-sm text-gray-500 dark:text-gray-400">
+            {item.harvestDays <= 70 ? 'Fast' : item.harvestDays <= 80 ? 'Medium' : 'Slow'}
+          </div>
+        </div>
+      ),
+    },
+    {
+      key: 'yieldPerHectare',
+      header: t('table.yield'),
+      sortable: true,
+      align: 'right' as const,
+      render: (item: typeof varieties[0]) => (
+        <div className="text-right">
+          <div className="font-medium">{item.yieldPerHectare.toLocaleString()} kg</div>
+          <div className="text-sm text-gray-500 dark:text-gray-400">per hectare</div>
+        </div>
+      ),
+    },
+    {
+      key: 'price',
+      header: t('table.price'),
+      sortable: true,
+      align: 'right' as const,
+      render: (item: typeof varieties[0]) => (
+        <div className="text-right">
+          <div className="font-medium text-green-600 dark:text-green-400">
+            Rp {item.price.toLocaleString()}
+          </div>
+          <div className="text-sm text-gray-500 dark:text-gray-400">per 100 seeds</div>
+        </div>
+      ),
+    },
+  ];
+
+  const handleViewDetails = (item: typeof varieties[0]) => {
+    // Navigate to detail page or show modal
+    console.log('View details:', item);
+  };
+
+  const handleSelectVariety = (item: typeof varieties[0]) => {
+    // Add to cart or selection
+    console.log('Select variety:', item);
   };
 
   return (
-    <Layout>
-      {/* Hero Section */}
-      <HeroSection
-        title="Varietas Bibit Cabai"
-        subtitle="Kami menyediakan berbagai varietas bibit cabai dengan karakteristik unggulan masing-masing untuk kebutuhan budidaya Anda."
-        backgroundImage="/cabai-rawit-hijau.jpg"
-        showButtons={false}
-      />
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Header */}
+        <div className="text-center mb-12 animate-fadeInUp">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            Chili Varieties
+          </h1>
+          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+            Explore our collection of premium chili seeds. Filter by type, spiciness, or harvest time to find the perfect variety for your farm.
+          </p>
+        </div>
 
-      {/* Filter Section */}
-      <section className="section bg-white">
-        <div className="container">
-          <div className="bg-gradient-to-r from-agriculture-50 to-orange-50 rounded-2xl p-6 mb-8">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-              <div>
-                <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-                  <Filter className="w-6 h-6" />
-                  Filter Varietas
-                </h2>
-                <p className="text-gray-600">
-                  Temukan varietas yang cocok dengan kebutuhan Anda
-                </p>
-              </div>
-              
-              <button
-                onClick={resetFilters}
-                className="btn btn-outline self-start md:self-center"
-              >
-                Reset Filter
-              </button>
-            </div>
+        {/* Filter & Search */}
+        <div className="mb-8 animate-fadeIn">
+          <FilterSearch
+            onSearch={setSearchQuery}
+            onFilterChange={setActiveFilters}
+            onSortChange={setSortBy}
+            placeholder="Search chili varieties..."
+            className="glass rounded-2xl p-6"
+          />
+        </div>
 
-            {/* Search */}
-            <div className="mb-6">
-              <div className="relative">
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <input
-                  type="text"
-                  placeholder="Cari varietas cabai..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-agriculture-500 focus:border-transparent"
-                />
-              </div>
-            </div>
-
-            {/* Filters Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* Difficulty Filter */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Tingkat Kesulitan
-                </label>
-                <div className="flex flex-wrap gap-2">
-                  {difficulties.map((difficulty) => (
-                    <button
-                      key={difficulty}
-                      onClick={() => setSelectedDifficulty(
-                        selectedDifficulty === difficulty ? '' : difficulty
-                      )}
-                      className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                        selectedDifficulty === difficulty
-                          ? difficulty === 'Mudah'
-                            ? 'bg-green-100 text-green-800'
-                            : difficulty === 'Sedang'
-                            ? 'bg-yellow-100 text-yellow-800'
-                            : 'bg-red-100 text-red-800'
-                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                      }`}
-                    >
-                      {difficulty}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Spiciness Filter */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
-                  <Flame className="w-4 h-4" />
-                  Tingkat Kepedasan: {spicinessRange[0]} - {spicinessRange[1]}
-                </label>
-                <div className="flex items-center gap-4">
-                  <input
-                    type="range"
-                    min="1"
-                    max="10"
-                    value={spicinessRange[0]}
-                    onChange={(e) => setSpicinessRange([parseInt(e.target.value), spicinessRange[1]])}
-                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                  />
-                  <input
-                    type="range"
-                    min="1"
-                    max="10"
-                    value={spicinessRange[1]}
-                    onChange={(e) => setSpicinessRange([spicinessRange[0], parseInt(e.target.value)])}
-                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                  />
-                </div>
-              </div>
-
-              {/* Harvest Time Filter */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
-                  <Clock className="w-4 h-4" />
-                  Masa Panen
-                </label>
-                <select
-                  value={selectedHarvestTime}
-                  onChange={(e) => setSelectedHarvestTime(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-agriculture-500 focus:border-transparent"
-                >
-                  <option value="">Semua Masa Panen</option>
-                  {harvestTimes.map((time) => (
-                    <option key={time} value={time}>
-                      {time}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
+        {/* Results Count */}
+        <div className="mb-6 flex justify-between items-center">
+          <div className="text-gray-700 dark:text-gray-300">
+            Showing <span className="font-semibold">{filteredVarieties.length}</span> varieties
           </div>
-
-          {/* Results Count */}
-          <div className="flex justify-between items-center mb-6">
-            <div className="text-gray-700">
-              Menampilkan <span className="font-bold">{filteredVarieties.length}</span> dari{' '}
-              <span className="font-bold">{varieties.length}</span> varietas
-            </div>
-            
-            <div className="flex items-center gap-4 text-sm text-gray-600">
-              <div className="flex items-center gap-1">
-                <TrendingUp className="w-4 h-4" />
-                <span>Produktivitas Tinggi</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <Sun className="w-4 h-4" />
-                <span>Adaptif</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Varieties Grid */}
-          {filteredVarieties.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {filteredVarieties.map((variety) => (
-                <ProductCard 
-                  key={variety.id} 
-                  variety={variety} 
-                  showDetails={true}
-                />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12">
-              <div className="w-20 h-20 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
-                <Search className="w-10 h-10 text-gray-400" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
-                Varietas Tidak Ditemukan
-              </h3>
-              <p className="text-gray-600 mb-6">
-                Coba gunakan filter yang berbeda atau reset filter
-              </p>
-              <button
-                onClick={resetFilters}
-                className="btn btn-primary"
-              >
-                Reset Filter
-              </button>
-            </div>
-          )}
-
-          {/* CTA */}
-          <div className="mt-12 text-center">
-            <div className="bg-gradient-to-r from-agriculture-50 to-orange-50 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                Butuh Rekomendasi Khusus?
-              </h3>
-              <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-                Tim ahli kami siap membantu memilih varietas yang paling cocok 
-                untuk kondisi lahan dan pasar Anda.
-              </p>
-              <a
-                href="https://wa.me/628984338479"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-whatsapp px-8 py-4 text-lg inline-flex items-center gap-3"
-              >
-                💬 Konsultasi Gratis dengan Ahli
-              </a>
-            </div>
+          <div className="text-sm text-gray-500 dark:text-gray-400">
+            Sorted by: {sortBy === 'price' ? 'Price' : sortBy === 'yield' ? 'Yield' : 'Name'}
           </div>
         </div>
-      </section>
-    </Layout>
+
+        {/* Table */}
+        <div className="animate-fadeIn">
+          <Table
+            data={filteredVarieties}
+            columns={columns}
+            onView={handleViewDetails}
+            onSelect={handleSelectVariety}
+            striped
+            hoverable
+            selectable
+            className="shadow-lg rounded-xl overflow-hidden"
+          />
+        </div>
+
+        {/* No Results */}
+        {filteredVarieties.length === 0 && (
+          <div className="text-center py-12">
+            <div className="text-gray-400 dark:text-gray-500 text-6xl mb-4">🌶️</div>
+            <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">
+              No varieties found
+            </h3>
+            <p className="text-gray-500 dark:text-gray-400">
+              Try adjusting your search or filters
+            </p>
+          </div>
+        )}
+
+        {/* Stats */}
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/30 rounded-xl p-6 text-center">
+            <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">
+              {varieties.length}
+            </div>
+            <div className="text-gray-700 dark:text-gray-300">Total Varieties</div>
+          </div>
+          <div className="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/30 dark:to-orange-800/30 rounded-xl p-6 text-center">
+            <div className="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-2">
+              {Math.min(...varieties.map(v => v.harvestDays))} days
+            </div>
+            <div className="text-gray-700 dark:text-gray-300">Fastest Harvest</div>
+          </div>
+          <div className="bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/30 dark:to-red-800/30 rounded-xl p-6 text-center">
+            <div className="text-3xl font-bold text-red-600 dark:text-red-400 mb-2">
+              {Math.max(...varieties.map(v => v.yieldPerHectare)).toLocaleString()} kg
+            </div>
+            <div className="text-gray-700 dark:text-gray-300">Highest Yield</div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
+
+export default VarietiesPage;
